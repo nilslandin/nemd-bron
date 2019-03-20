@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "76271798955",
+    "firebase_url": "https://nemd-bron.firebaseio.com",
+    "project_id": "nemd-bron",
+    "storage_bucket": "nemd-bron.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:76271798955:android:4d3676a332e07bb7",
+        "android_client_info": {
+          "package_name": "com.nemd.bron"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "76271798955-lts067kqkq5n1am0ff1i947n8lemt7f4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFLFRhaPwAKx_xW3NuhHXj2U5-hkUClxc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
