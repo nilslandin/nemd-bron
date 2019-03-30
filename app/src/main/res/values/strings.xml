@@ -11,4 +11,5 @@
     <string name="health_care_provider">Health Care Provider</string>
     <string name="sign_in_hcp">Sign in as Health Care Provider</string>
     <string name="email">Email</string>
+    <string name="send_request">Send request</string>
 </resources>

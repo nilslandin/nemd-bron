@@ -4,7 +4,7 @@ import android.os.Bundle
 import com.nemd.bron.AbstractMainActivity
 import com.nemd.bron.R
 import com.nemd.bron.model.User
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_patient_main.*
 import timber.log.Timber
 
 
@@ -14,7 +14,7 @@ class PatientMainActivity : AbstractMainActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_patient_main)
     }
 
     override fun onStart() {

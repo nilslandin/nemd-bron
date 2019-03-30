@@ -4,8 +4,10 @@ import android.os.Bundle
 import com.nemd.bron.AbstractMainActivity
 import com.nemd.bron.R
 import com.nemd.bron.model.HCP
-import com.nemd.bron.model.User
-import kotlinx.android.synthetic.main.activity_main.*
+import com.nemd.bron.network.FireBaseHelper
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.activity_hcp_main.*
 import timber.log.Timber
 
 class HcpMainActivity : AbstractMainActivity() {
@@ -14,20 +16,40 @@ class HcpMainActivity : AbstractMainActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_hcp_main)
     }
 
     override fun onStart() {
         super.onStart()
 
         getUser()
+
+        createPendingRequest.setOnClickListener {
+            currentUser?.uid?.let { userId ->
+                FireBaseHelper.getFireBaseService().addPendingRequest("191212121212", userId)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(
+                        {
+                            Timber.d("Sent request")
+                        },
+                        {
+                            Timber.e(it)
+                        }
+                    )
+            }
+        }
+
+        signOutBtn.setOnClickListener {
+            logout()
+        }
     }
 
     private fun getUser() {
-        val currentUser = fireBaseAuth.currentUser
+        currentUser = fireBaseAuth.currentUser
 
-        if (currentUser != null) {
-            fireBaseDB.collection("healthCareProviders").document(currentUser.uid)
+        currentUser?.uid?.let { userId ->
+            fireBaseDB.collection("healthCareProviders").document(userId)
                 .get()
                 .addOnSuccessListener { document ->
                     Timber.d("${document.id} => ${document.data}")
@@ -46,9 +68,5 @@ class HcpMainActivity : AbstractMainActivity() {
 
     private fun updateUI() {
         nameTV.text = hcp?.getFullName()
-
-        signOutBtn.setOnClickListener {
-            logout()
-        }
     }
 }
