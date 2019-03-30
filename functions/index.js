@@ -20,7 +20,7 @@ exports.addPendingRequestAndNotifyPatient = functions.https.onRequest((request, 
 		    	user = doc;
 			});
 
-			return response.send("Got user from Firebase!");
+			return response.send("Got user from Firebase!" + user.data().firebase_token);
 		})
 	})
  });
