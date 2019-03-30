@@ -7,7 +7,7 @@ export const helloWorld = functions.https.onRequest((request, response) => {
 
  // response.send("Hello from Firebase!" + original);
 
-    admin.firestore().collection('pendingRequest').add({hpid: request.query.hpid,
+    return admin.firestore().collection('pendingRequest').add({hpid: request.query.hpid,
     	ssn: request.query.ssn, accepted: false, declined: false, acceptedhps: []})
     
     //return response.json({result: `Message with ID: added.`});
