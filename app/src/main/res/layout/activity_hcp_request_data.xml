@@ -19,6 +19,7 @@
             android:layout_margin="@dimen/activity_margin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="number"
             android:padding="@dimen/activity_margin"
             android:hint="@string/patient_ssn"/>
 
@@ -28,6 +29,8 @@
             android:layout_margin="@dimen/activity_margin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:textColor="@android:color/white"
             android:text="@string/send_request"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

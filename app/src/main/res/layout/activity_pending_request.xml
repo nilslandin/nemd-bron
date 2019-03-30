@@ -19,14 +19,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/activity_margin"
-    android:text="@string/approve"/>
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:textColor="@android:color/white"
+            android:text="@string/approve"/>
 
     <androidx.appcompat.widget.AppCompatButton
             app:layout_constraintTop_toBottomOf="@+id/approveBtn"
             android:id="@+id/declineBtn"
             android:text="@string/decline"
-            android:layout_marginStart="@dimen/activity_margin"
-            android:layout_marginEnd="@dimen/activity_margin"
+            android:layout_margin="@dimen/activity_margin"
+            android:backgroundTint="@color/colorAccent"
+            android:textColor="@android:color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 

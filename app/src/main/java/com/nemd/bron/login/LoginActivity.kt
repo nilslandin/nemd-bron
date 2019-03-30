@@ -16,7 +16,6 @@ class LoginActivity : AppCompatActivity() {
             Intent(this, LoginPatientActivity::class.java)
                 .also {
                     startActivity(it)
-                    finish()
                 }
         }
 
@@ -24,7 +23,6 @@ class LoginActivity : AppCompatActivity() {
             Intent(this, LoginHealthCareActivity::class.java)
                 .also {
                     startActivity(it)
-                    finish()
                 }
         }
     }

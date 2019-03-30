@@ -18,4 +18,5 @@
     <string name="consent_channel_name">Consent notification</string>
     <string name="approve">Approve</string>
     <string name="decline">Decline</string>
+    <string name="sign_in_as_patient">Sign in as patient</string>
 </resources>

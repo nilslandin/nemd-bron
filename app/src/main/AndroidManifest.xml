@@ -20,8 +20,10 @@
         </activity>
 
         <activity android:name=".login.LoginActivity"/>
-        <activity android:name=".login.LoginPatientActivity"/>
-        <activity android:name=".login.LoginHealthCareActivity"/>
+        <activity android:name=".login.LoginPatientActivity"
+                  android:parentActivityName=".login.LoginActivity"/>
+        <activity android:name=".login.LoginHealthCareActivity"
+                  android:parentActivityName=".login.LoginActivity"/>
 
         <activity android:name=".patient.PatientMainActivity"/>
         <activity android:name=".hcp.HcpMainActivity"/>
