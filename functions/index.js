@@ -4,7 +4,7 @@ admin.initializeApp();
 // Create and Deploy Your First Cloud Functions
 // https://firebase.google.com/docs/functions/write-firebase-functions
 
-exports.addPendingRequestAndNotifyPatient = functions.https.onRequest((request, response) => {
+exports.addPendingRequestAndNotifyPatient = functions.region('europe-west1').https.onRequest((request, response) => {
 
  	return admin.firestore().collection("pendingRequests").add({
 		ssn: request.query.ssn, 
@@ -40,18 +40,44 @@ exports.addPendingRequestAndNotifyPatient = functions.https.onRequest((request, 
 	})
  });
 
-exports.registerRequestApprovedRejected = functions.https.onRequest((request, response) => {
-	return admin.firestore().collection("pendingRequests").document(request.query.requestId).get().then(document => 
-	{
-		if (request.query.accepted === true) {
-				return response.json({result: "Request approved" + document.data().requestApproved});
-		//document.requestApproved = true;
-		}
-		else {
-				return response.json({result: "Request declined" + document.data().requestApproved});
-		}
-		//admin.firestore.collection("pendingRequests").document(request.query.requestId).set()
-	})
-	
+exports.registerRequestApprovedRejected = functions.region('europe-west1').https.onRequest((request, response) => {
+	return admin.firestore().collection("pendingRequests").doc(request.query.requestId).get().then(doc => {
+		return admin.firestore().collection("healthCareProviders").doc(doc.data().hpid).get().then(hcp => {
+			if (request.query.accepted === "true") {
+				admin.firestore().collection("pendingRequests").doc(request.query.requestId).update({
+					requestApproved: true
+				})
+			    const payload = {
+					notification: {
+				        title: "Patient approved your request.",
+				        body: "The patient's data can now be accessed."
+			    	},
+					data: {
+			      		requestApprovedId: request.query.requestId
+					}
+				}
+				admin.messaging().sendToDevice(hcp.data().firebase_token, payload);
 
+				return response.json({result: "Notification sent to " + hcp.data().firebase_token});
+			}
+			else {
+				admin.firestore().collection("pendingRequests").doc(request.query.requestId).update({
+					requestRejected: true
+				})
+			    const payload = {
+					notification: {
+				        title: "Patient did not approve your request.",
+				        body: "You are unable to access the patient's data."
+			    	},
+					data: {
+			      		requestApprovedId: request.query.requestId
+					}
+				}
+				admin.messaging().sendToDevice(hcp.data().firebase_token, payload);
+
+				return response.json({result: "Declined Notification sent to " + hcp.data().firebase_token});
+			}
+		})
+	})
  });
+
