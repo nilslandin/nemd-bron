@@ -1,3 +1,6 @@
 <resources>
-    <string name="app_name">NEMD_bron</string>
+    <string name="app_name">MeDBroN</string>
+    <string name="sign_in">Sign in</string>
+    <string name="ssn">Social Security Number</string>
+    <string name="password">Password</string>
 </resources>

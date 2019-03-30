@@ -1,12 +1,11 @@
 package com.nemd.bron
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.view.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -29,7 +28,7 @@ class MainActivity : AppCompatActivity() {
             showSignIn()
         }
         else {
-            showSignedIn()
+            getUser()
         }
     }
 
@@ -43,6 +42,10 @@ class MainActivity : AppCompatActivity() {
                 .setAvailableProviders(providers)
                 .build(),
             RC_SIGN_IN)
+    }
+
+    private fun getUser() {
+
     }
 
     private fun showSignedIn() {

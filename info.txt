@@ -1,0 +1,18 @@
+Patient
+	Pnr
+	Email
+	FirebaseToken
+	Name?
+	Location?
+
+
+Health Care Provider
+	Id
+
+Research
+Public health intitutions
+
+Users
+	pontus.thome@gmail.com
+	qaqaqa
+	19121212-1212
