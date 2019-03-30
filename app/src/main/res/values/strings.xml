@@ -15,4 +15,5 @@
     <string name="request_data_for_patient">Request data for patient</string>
     <string name="send_request_for_data_title">Request data for patient</string>
     <string name="patient_ssn">Patient\'s ssn</string>
+    <string name="consent_channel_name">Consent notification</string>
 </resources>

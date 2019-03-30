@@ -28,6 +28,16 @@ object SharedPreferenceHelper {
         getSharedPreferences(context).edit().putString(USER_TYPE_PREF, userType.name).apply()
     }
 
+    private const val NOTIFICATION_ID_PREF = "NOTIFICATION_ID_PREF"
+
+    fun getNotificationId(context: Context): Int {
+        val notificationId = getSharedPreferences(context).getInt(NOTIFICATION_ID_PREF, 0) + 1
+
+        getSharedPreferences(context).edit().putInt(NOTIFICATION_ID_PREF, notificationId).apply()
+
+        return notificationId
+    }
+
 }
 
 enum class UserType {

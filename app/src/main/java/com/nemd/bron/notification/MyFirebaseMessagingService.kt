@@ -1,12 +1,73 @@
 package com.nemd.bron.notification
 
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.messaging.FirebaseMessagingService
+import com.google.firebase.messaging.RemoteMessage
+import com.nemd.bron.R
+import com.nemd.bron.SharedPreferenceHelper
+import com.nemd.bron.SplashActivity
+import com.nemd.bron.patient.PatientMainActivity
 import timber.log.Timber
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
+
+    override fun onMessageReceived(remoteMessage: RemoteMessage?) {
+
+        // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
+        Timber.d("From: ${remoteMessage?.from}")
+
+        // Check if message contains a notification payload.
+        remoteMessage?.notification?.let {
+            Timber.d("Message Notification Body: ${it.body}")
+        }
+
+        remoteMessage?.data?.let { data ->
+            val pendingIntent =
+                if (data.containsKey("requestId")) {
+                    val intent = Intent(this, PatientMainActivity::class.java).apply {
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        putExtra(PatientMainActivity.CONSENT_DATA, data["requestId"])
+                    }
+
+                    PendingIntent.getActivity(this, 0, intent, 0)
+                } else {
+                    PendingIntent.getActivity(this, 0, null, 0)
+                }
+
+            val builder = NotificationCompat.Builder(this, createNotificationChannel())
+                .setSmallIcon(R.drawable.ic_stat_name)
+                .setContentTitle(remoteMessage.notification?.title)
+                .setContentText(remoteMessage.notification?.body)
+                .setPriority(NotificationCompat.PRIORITY_MAX)
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
+
+            with(NotificationManagerCompat.from(this)) {
+                // notificationId is a unique int for each notification that you must define
+                notify(SharedPreferenceHelper.getNotificationId(this@MyFirebaseMessagingService), builder.build())
+            }
+        }
+    }
+
+    private fun createNotificationChannel(): String {
+        val channelId = "ConsentChannel"
+        val channelName = getString(R.string.consent_channel_name)
+        val channel = NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH)
+        channel.lockscreenVisibility = Notification.VISIBILITY_PUBLIC
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.createNotificationChannel(channel)
+        return channelId
+    }
 
     /**
      * Called if InstanceID token is updated. This may occur if the security of

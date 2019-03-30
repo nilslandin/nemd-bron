@@ -12,6 +12,10 @@ class PatientMainActivity : AbstractMainActivity() {
 
     private var user: User? = null
 
+    companion object {
+        const val CONSENT_DATA = "CONSENT_DATA"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_patient_main)
