@@ -1,21 +1,16 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 admin.initializeApp();
-// // Create and Deploy Your First Cloud Functions
-export const helloWorld = functions.https.onRequest((request, response) => {
-//  const original = request.query.text;
+// Create and Deploy Your First Cloud Functions
+// https://firebase.google.com/docs/functions/write-firebase-functions
 
- // response.send("Hello from Firebase!" + original);
+exports.addPendingRequest = functions.https.onRequest((request, response) => {
 
-    return admin.firestore().collection('pendingRequest').add({hpid: request.query.hpid,
-    	ssn: request.query.ssn, accepted: false, declined: false, acceptedhps: []})
-    
-    //return response.json({result: `Message with ID: added.`});
-});
-export const helloWorld2 = functions.https.onRequest((request, response) => {
-
-	admin.firestore().collection('pendingRequest').where('ssn',"==", request.query.ssn).get();
-
-
-    return response.json({result: `Message with ID: added.`});
-});
+ 	return admin.firestore().collection("pendingRequests").add({
+		ssn: request.query.ssn, 
+		hpid: request.query.hpid
+	}).then((result) => {
+	 	return response.send("Hello from Firebase!" + result.id + " end");
+		// body...
+	})
+ });
