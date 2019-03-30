@@ -7,7 +7,18 @@ export const helloWorld = functions.https.onRequest((request, response) => {
 
  // response.send("Hello from Firebase!" + original);
 
-    admin.firestore().collection('pendingRequeest').add({HpID: "testId", pnr: "1912121212"});
+    admin.firestore().collection('pendingRequest').add({hpid: request.query.hpid,
+    	ssn: request.query.ssn, accepted: false, declined: false, acceptedhps: []})
+    .then(function (result) {
+    	console.log("Document written with ID: ", result.id);
+    })
+
+    return response.json({result: `Message with ID: added.`});
+});
+export const helloWorld2 = functions.https.onRequest((request, response) => {
+
+	admin.firestore().collection('pendingRequest').where('ssn',"==", request.query.ssn).get();
+
 
     return response.json({result: `Message with ID: added.`});
 });
