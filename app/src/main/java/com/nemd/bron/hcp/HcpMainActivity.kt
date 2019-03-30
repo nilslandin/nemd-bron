@@ -5,9 +5,6 @@ import android.os.Bundle
 import com.nemd.bron.AbstractMainActivity
 import com.nemd.bron.R
 import com.nemd.bron.model.HCP
-import com.nemd.bron.network.FireBaseHelper
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_hcp_main.*
 import timber.log.Timber
 
@@ -15,6 +12,7 @@ class HcpMainActivity : AbstractMainActivity() {
 
     companion object {
         private const val REQUEST_CODE = 1
+        const val REQUEST_ID_EXTRA = "REQUEST_ID_EXTRA"
     }
 
     private var hcp: HCP? = null
@@ -65,4 +63,10 @@ class HcpMainActivity : AbstractMainActivity() {
     private fun updateUI() {
         nameTV.text = hcp?.getFullName()
     }
+
+
+    override fun getUserType(): String {
+        return "healthCareProviders"
+    }
+
 }

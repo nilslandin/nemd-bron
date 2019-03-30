@@ -79,4 +79,8 @@ class PatientMainActivity : AbstractMainActivity() {
             logout()
         }
     }
+
+    override fun getUserType(): String {
+        return "users"
+    }
 }

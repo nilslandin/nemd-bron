@@ -15,6 +15,8 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.nemd.bron.R
 import com.nemd.bron.SharedPreferenceHelper
+import com.nemd.bron.hcp.HcpMainActivity
+import com.nemd.bron.hcp.HcpRequestDataActivity
 import com.nemd.bron.patient.PendingRequestActivity
 import timber.log.Timber
 
@@ -35,13 +37,23 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                 if (data.containsKey("requestId")) {
                     val intent = Intent(this, PendingRequestActivity::class.java).apply {
                         flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                        putExtra(PendingRequestActivity.CONSENT_DATA, data["requestId"])
+                        putExtra(PendingRequestActivity.REQUEST_ID_EXTRA, data["requestId"] as String)
                     }
 
-                    PendingIntent.getActivity(this, 0, intent, 0)
-                } else {
-                    PendingIntent.getActivity(this, 0, null, 0)
+                    PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
                 }
+                else if (data.containsKey("requestApprovedId")) {
+                    val intent = Intent(this, HcpMainActivity::class.java).apply {
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        putExtra(HcpMainActivity.REQUEST_ID_EXTRA, data["requestApprovedId"] as String)
+                    }
+
+                    PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+                }
+                else {
+                    PendingIntent.getActivity(this, 0, null, PendingIntent.FLAG_UPDATE_CURRENT)
+                }
+
 
             val builder = NotificationCompat.Builder(this, createNotificationChannel())
                 .setSmallIcon(R.drawable.ic_stat_name)
@@ -86,7 +98,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                 FirebaseFirestore.getInstance().collection("users").document(userId)
                     .set(userUpdate, SetOptions.merge())
                     .addOnSuccessListener { Timber.d("DocumentSnapshot successfully written!") }
-                    .addOnFailureListener { e -> Timber.w(e, "Error writing document") }
+                    .addOnFailureListener { e -> Timber.e(e, "Error writing document") }
             }
         }
     }

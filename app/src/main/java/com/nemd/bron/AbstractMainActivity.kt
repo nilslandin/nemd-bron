@@ -45,10 +45,12 @@ abstract class AbstractMainActivity : UserAwareBaseActivity() {
             val userUpdate = HashMap<String, Any>()
             userUpdate["firebase_token"] = token
 
-            fireBaseDB.collection("users").document(currentUser.uid)
+            fireBaseDB.collection(getUserType()).document(currentUser.uid)
                 .set(userUpdate, SetOptions.merge())
                 .addOnSuccessListener { Timber.d("DocumentSnapshot successfully written!") }
                 .addOnFailureListener { e -> Timber.w(e, "Error writing document") }
         }
     }
+
+    abstract fun getUserType(): String
 }

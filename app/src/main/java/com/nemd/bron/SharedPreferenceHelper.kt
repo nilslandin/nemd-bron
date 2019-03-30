@@ -2,6 +2,7 @@ package com.nemd.bron
 
 import android.content.Context
 import android.content.SharedPreferences
+import timber.log.Timber
 
 object SharedPreferenceHelper {
 
@@ -35,6 +36,7 @@ object SharedPreferenceHelper {
 
         getSharedPreferences(context).edit().putInt(NOTIFICATION_ID_PREF, notificationId).apply()
 
+        Timber.d("NotificationID %s", notificationId.toString())
         return notificationId
     }
 

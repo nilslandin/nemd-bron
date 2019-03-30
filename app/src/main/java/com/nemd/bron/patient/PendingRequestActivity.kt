@@ -15,7 +15,7 @@ import timber.log.Timber
 class PendingRequestActivity : UserAwareBaseActivity() {
 
     companion object {
-        const val CONSENT_DATA = "CONSENT_DATA"
+        const val REQUEST_ID_EXTRA = "REQUEST_ID_EXTRA"
     }
 
     private lateinit var requestId: String
@@ -24,11 +24,11 @@ class PendingRequestActivity : UserAwareBaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pending_request)
 
-        if (!intent.hasExtra(CONSENT_DATA)) {
+        if (!intent.hasExtra(REQUEST_ID_EXTRA)) {
             goToMain()
         }
         else {
-            requestId = intent.getStringExtra(CONSENT_DATA)
+            requestId = intent.getStringExtra(REQUEST_ID_EXTRA)
 
             approveBtn.setOnClickListener{
                 sendConsent(true)
@@ -45,7 +45,7 @@ class PendingRequestActivity : UserAwareBaseActivity() {
         loading.visibility = View.VISIBLE
 
         consentDisposable?.dispose()
-        consentDisposable = FireBaseHelper.getFireBaseService().sendConsent(requestId, consentApproved)
+        consentDisposable = FireBaseHelper.getFireBaseService().sendConsent(requestId, consentApproved.toString())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(

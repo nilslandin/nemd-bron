@@ -14,6 +14,6 @@ interface FirebaseService {
 
     @GET("registerRequestApprovedRejected")
     fun sendConsent(@Query("requestId") requestId: String,
-                    @Query("accepted") accepted: Boolean): Observable<RequestResponse>
+                    @Query("accepted") accepted: String): Observable<RequestResponse>
 
 }

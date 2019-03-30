@@ -9,7 +9,7 @@ object FireBaseHelper {
 
     fun getFireBaseService(): FirebaseService {
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://us-central1-nemd-bron.cloudfunctions.net/")
+            .baseUrl("https://europe-west1-nemd-bron.cloudfunctions.net/")
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
