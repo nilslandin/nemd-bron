@@ -1,20 +1,25 @@
-package com.nemd.bron
+package com.nemd.bron.login
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.activity_login.*
+import com.nemd.bron.patient.PatientMainActivity
+import com.nemd.bron.R
+import com.nemd.bron.SharedPreferenceHelper
+import com.nemd.bron.UserType
+import kotlinx.android.synthetic.main.activity_login_patient.*
 import timber.log.Timber
 
-class LoginActivity : AppCompatActivity() {
+class LoginPatientActivity : AppCompatActivity() {
 
     private val firebaseAuth = FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.activity_login_patient)
 
         loginBtn.setOnClickListener {
             login()
@@ -37,7 +42,8 @@ class LoginActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     Timber.d("signInWithEmail:success")
 
-                    Intent(this, MainActivity::class.java)
+                    SharedPreferenceHelper.setUserType(this, UserType.PATIENT)
+                    Intent(this, PatientMainActivity::class.java)
                         .also {
                             startActivity(it)
                             finishAffinity()

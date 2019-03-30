@@ -4,6 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.nemd.bron.hcp.HcpMainActivity
+import com.nemd.bron.login.LoginActivity
+import com.nemd.bron.patient.PatientMainActivity
 
 class SplashActivity : AppCompatActivity() {
 
@@ -17,7 +20,12 @@ class SplashActivity : AppCompatActivity() {
 
         val intent =
             if (currentUser != null) {
-                Intent(this, MainActivity::class.java)
+                if (SharedPreferenceHelper.getUserType(this) == UserType.PATIENT) {
+                    Intent(this, PatientMainActivity::class.java)
+                }
+                else {
+                    Intent(this, HcpMainActivity::class.java)
+                }
             } else {
                 Intent(this, LoginActivity::class.java)
             }

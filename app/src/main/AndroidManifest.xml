@@ -19,8 +19,12 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".LoginActivity"/>
+        <activity android:name=".login.LoginActivity"/>
+        <activity android:name=".login.LoginPatientActivity"/>
+        <activity android:name=".login.LoginHealthCareActivity"/>
+
+        <activity android:name=".patient.PatientMainActivity"/>
+        <activity android:name=".hcp.HcpMainActivity"/>
 
         <service
                 android:name=".notification.MyFirebaseMessagingService"

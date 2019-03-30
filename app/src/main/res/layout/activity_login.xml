@@ -1,44 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/signInTitleTV"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="@dimen/activity_margin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            android:text="@string/sign_in"
-            android:padding="@dimen/activity_margin"/>
-
-    <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/ssnET"
-            app:layout_constraintTop_toBottomOf="@+id/signInTitleTV"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/ssn"
-            android:inputType="number"
-            android:padding="@dimen/activity_margin"/>
-
-    <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/passwordET"
-            app:layout_constraintTop_toBottomOf="@+id/ssnET"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/password"
-            android:inputType="textPassword"
-            android:padding="@dimen/activity_margin"/>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="center_vertical">
 
     <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/loginBtn"
-            app:layout_constraintTop_toBottomOf="@+id/passwordET"
+            android:id="@+id/signInPatientBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/activity_margin"
-    android:text="@string/sign_in"/>
+            android:text="@string/patient"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/signInHealthCareProviderBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_margin"
+            android:layout_marginEnd="@dimen/activity_margin"
+            android:text="@string/health_care_provider"/>
+
+</LinearLayout>

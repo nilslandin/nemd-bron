@@ -4,15 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.nemd.bron.login.LoginActivity
 
 abstract class UserAwareBaseActivity : AppCompatActivity() {
 
     protected val fireBaseAuth : FirebaseAuth by lazy {
         FirebaseAuth.getInstance()
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
     }
 
     override fun onStart() {
@@ -23,7 +20,12 @@ abstract class UserAwareBaseActivity : AppCompatActivity() {
         }
     }
 
-    protected fun goToLogin() {
+    protected fun logout() {
+        fireBaseAuth.signOut()
+        goToLogin()
+    }
+
+    fun goToLogin() {
         Intent(this, LoginActivity::class.java)
             .also {
                 startActivity(it)
