@@ -1,10 +1,7 @@
-import * as functions from 'firebase-functions';
+const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 admin.initializeApp();
-
-// // Start writing Firebase Functions
-// // https://firebase.google.com/docs/functions/typescript
-//
+// // Create and Deploy Your First Cloud Functions
 export const helloWorld = functions.https.onRequest((request, response) => {
 //  const original = request.query.text;
 
