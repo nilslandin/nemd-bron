@@ -25,6 +25,7 @@
 
         <activity android:name=".patient.PatientMainActivity"/>
         <activity android:name=".hcp.HcpMainActivity"/>
+        <activity android:name=".hcp.HcpRequestDataActivity"/>
 
         <service
                 android:name=".notification.MyFirebaseMessagingService"

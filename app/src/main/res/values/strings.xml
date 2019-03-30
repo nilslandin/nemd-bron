@@ -12,4 +12,7 @@
     <string name="sign_in_hcp">Sign in as Health Care Provider</string>
     <string name="email">Email</string>
     <string name="send_request">Send request</string>
+    <string name="request_data_for_patient">Request data for patient</string>
+    <string name="send_request_for_data_title">Request data for patient</string>
+    <string name="patient_ssn">Patient\'s ssn</string>
 </resources>

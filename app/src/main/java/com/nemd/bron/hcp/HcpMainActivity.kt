@@ -1,5 +1,6 @@
 package com.nemd.bron.hcp
 
+import android.content.Intent
 import android.os.Bundle
 import com.nemd.bron.AbstractMainActivity
 import com.nemd.bron.R
@@ -11,6 +12,10 @@ import kotlinx.android.synthetic.main.activity_hcp_main.*
 import timber.log.Timber
 
 class HcpMainActivity : AbstractMainActivity() {
+
+    companion object {
+        private const val REQUEST_CODE = 1
+    }
 
     private var hcp: HCP? = null
 
@@ -25,19 +30,10 @@ class HcpMainActivity : AbstractMainActivity() {
         getUser()
 
         createPendingRequest.setOnClickListener {
-            currentUser?.uid?.let { userId ->
-                FireBaseHelper.getFireBaseService().addPendingRequest("191212121212", userId)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(
-                        {
-                            Timber.d("Sent request")
-                        },
-                        {
-                            Timber.e(it)
-                        }
-                    )
-            }
+            Intent(this, HcpRequestDataActivity::class.java)
+                .also {
+                    startActivityForResult(it, REQUEST_CODE)
+                }
         }
 
         signOutBtn.setOnClickListener {
