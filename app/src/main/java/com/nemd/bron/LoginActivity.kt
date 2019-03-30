@@ -1,5 +1,6 @@
 package com.nemd.bron
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -35,9 +36,13 @@ class LoginActivity : AppCompatActivity() {
         firebaseAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
                     Timber.d("signInWithEmail:success")
-                    Toast.makeText(baseContext, "Authentication successful!", Toast.LENGTH_SHORT).show()
+
+                    Intent(this, MainActivity::class.java)
+                        .also {
+                            startActivity(it)
+                            finishAffinity()
+                        }
                 } else {
                     // If sign in fails, display a message to the user.
                     Timber.e(task.exception, "signInWithEmail:failure")
