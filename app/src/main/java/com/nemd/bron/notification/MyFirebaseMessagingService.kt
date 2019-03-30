@@ -15,8 +15,7 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.nemd.bron.R
 import com.nemd.bron.SharedPreferenceHelper
-import com.nemd.bron.SplashActivity
-import com.nemd.bron.patient.PatientMainActivity
+import com.nemd.bron.patient.PendingRequestActivity
 import timber.log.Timber
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
@@ -34,9 +33,9 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         remoteMessage?.data?.let { data ->
             val pendingIntent =
                 if (data.containsKey("requestId")) {
-                    val intent = Intent(this, PatientMainActivity::class.java).apply {
+                    val intent = Intent(this, PendingRequestActivity::class.java).apply {
                         flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                        putExtra(PatientMainActivity.CONSENT_DATA, data["requestId"])
+                        putExtra(PendingRequestActivity.CONSENT_DATA, data["requestId"])
                     }
 
                     PendingIntent.getActivity(this, 0, intent, 0)

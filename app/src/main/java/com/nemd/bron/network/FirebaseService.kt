@@ -10,4 +10,10 @@ interface FirebaseService {
     @GET("addPendingRequestAndNotifyPatient")
     fun addPendingRequest(@Query("ssn") ssn: String,
                           @Query("hpid") hpid: String): Observable<RequestResponse>
+
+
+    @GET("registerRequestApprovedRejected")
+    fun sendConsent(@Query("requestId") requestId: String,
+                    @Query("accepted") accepted: Boolean): Observable<RequestResponse>
+
 }
