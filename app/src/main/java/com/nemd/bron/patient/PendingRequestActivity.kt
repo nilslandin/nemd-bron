@@ -24,6 +24,8 @@ class PendingRequestActivity : UserAwareBaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pending_request)
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         if (!intent.hasExtra(REQUEST_ID_EXTRA)) {
             goToMain()
         }

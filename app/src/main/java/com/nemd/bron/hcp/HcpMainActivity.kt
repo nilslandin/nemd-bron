@@ -12,7 +12,6 @@ class HcpMainActivity : AbstractMainActivity() {
 
     companion object {
         private const val REQUEST_CODE = 1
-        const val REQUEST_ID_EXTRA = "REQUEST_ID_EXTRA"
     }
 
     private var hcp: HCP? = null

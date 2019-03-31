@@ -19,4 +19,6 @@
     <string name="approve">Approve</string>
     <string name="decline">Decline</string>
     <string name="sign_in_as_patient">Sign in as patient</string>
+    <string name="fetch_journals">Fetch journals</string>
+    <string name="fetch_journals_for_patient">Fetch journals for %s</string>
 </resources>

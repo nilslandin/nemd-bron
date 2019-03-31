@@ -20,16 +20,24 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".login.LoginActivity"/>
+        <activity android:name=".login.LoginActivity"
+                  android:launchMode="singleTop"/>
         <activity android:name=".login.LoginPatientActivity"
                   android:parentActivityName=".login.LoginActivity"/>
         <activity android:name=".login.LoginHealthCareActivity"
                   android:parentActivityName=".login.LoginActivity"/>
 
-        <activity android:name=".patient.PatientMainActivity"/>
-        <activity android:name=".hcp.HcpMainActivity"/>
-        <activity android:name=".hcp.HcpRequestDataActivity"/>
-        <activity android:name=".patient.PendingRequestActivity"/>
+        <activity android:name=".patient.PatientMainActivity"
+                  android:launchMode="singleTop"/>
+        <activity android:name=".patient.PendingRequestActivity"
+                  android:parentActivityName=".patient.PatientMainActivity"/>
+
+        <activity android:name=".hcp.HcpMainActivity"
+                  android:launchMode="singleTop"/>
+        <activity android:name=".hcp.HcpRequestDataActivity"
+                  android:parentActivityName=".hcp.HcpMainActivity"/>
+        <activity android:name=".hcp.FetchPdfActivity"
+                  android:parentActivityName=".hcp.HcpMainActivity"/>
 
         <service
                 android:name=".notification.MyFirebaseMessagingService"

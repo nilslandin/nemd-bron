@@ -16,6 +16,8 @@ class HcpRequestDataActivity : UserAwareBaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hcp_request_data)
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         sendRequestBtn.setOnClickListener {
             fireBaseAuth.currentUser?.uid?.let { userId ->
                 FireBaseHelper.getFireBaseService().addPendingRequest(ssnET.text.toString(), userId)

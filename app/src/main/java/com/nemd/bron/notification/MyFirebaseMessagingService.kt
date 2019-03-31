@@ -15,6 +15,7 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.nemd.bron.R
 import com.nemd.bron.SharedPreferenceHelper
+import com.nemd.bron.hcp.FetchPdfActivity
 import com.nemd.bron.hcp.HcpMainActivity
 import com.nemd.bron.hcp.HcpRequestDataActivity
 import com.nemd.bron.patient.PendingRequestActivity
@@ -43,9 +44,9 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                     PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
                 }
                 else if (data.containsKey("requestApprovedId")) {
-                    val intent = Intent(this, HcpMainActivity::class.java).apply {
+                    val intent = Intent(this, FetchPdfActivity::class.java).apply {
                         flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                        putExtra(HcpMainActivity.REQUEST_ID_EXTRA, data["requestApprovedId"] as String)
+                        putExtra(FetchPdfActivity.REQUEST_ID_EXTRA, data["requestApprovedId"] as String)
                     }
 
                     PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)

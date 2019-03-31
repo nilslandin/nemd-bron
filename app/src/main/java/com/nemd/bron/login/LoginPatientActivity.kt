@@ -25,7 +25,6 @@ class LoginPatientActivity : AppCompatActivity() {
             login()
         }
 
-        // Get a support ActionBar corresponding to this toolbar and enable the Up button
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
