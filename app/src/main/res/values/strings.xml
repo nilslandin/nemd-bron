@@ -22,4 +22,5 @@
     <string name="fetch_journals">Fetch journals</string>
     <string name="fetch_journals_for_patient">Fetch journals for %s</string>
     <string name="face_sheet">Journal item - Face Sheet</string>
+    <string name="send_emergency_request">Send emergancy request to next of kin</string>
 </resources>
