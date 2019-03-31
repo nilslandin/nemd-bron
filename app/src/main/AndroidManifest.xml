@@ -37,7 +37,10 @@
         <activity android:name=".hcp.HcpRequestDataActivity"
                   android:parentActivityName=".hcp.HcpMainActivity"/>
         <activity android:name=".hcp.FetchPdfActivity"
-                  android:parentActivityName=".hcp.HcpMainActivity"/>
+                  android:parentActivityName=".hcp.HcpMainActivity"
+                  android:launchMode="singleTop"/>
+        <activity android:name=".hcp.ViewPdfActivity"
+                  android:parentActivityName=".hcp.FetchPdfActivity"/>
 
         <service
                 android:name=".notification.MyFirebaseMessagingService"

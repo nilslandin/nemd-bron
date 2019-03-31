@@ -35,4 +35,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
+
+    <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/openPdf"
+            app:layout_constraintTop_toBottomOf="@+id/titleTV"
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/activity_margin"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:textColor="@android:color/white"
+            android:layout_height="wrap_content"
+            android:text="@string/face_sheet"
+    android:visibility="gone"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

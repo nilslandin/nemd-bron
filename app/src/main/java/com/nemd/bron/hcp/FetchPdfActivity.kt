@@ -1,6 +1,8 @@
 package com.nemd.bron.hcp
 
+import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import com.google.firebase.firestore.FirebaseFirestore
 import com.nemd.bron.R
@@ -18,10 +20,14 @@ class FetchPdfActivity : UserAwareBaseActivity() {
     private val fireBaseDB = FirebaseFirestore.getInstance()
 
 
+    private var handler: Handler? = null
+    private var runnable: Runnable? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fetch_pdf)
 
+        supportActionBar?.title = "Fetch Journals"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         if (intent.hasExtra(REQUEST_ID_EXTRA)) {
@@ -33,6 +39,23 @@ class FetchPdfActivity : UserAwareBaseActivity() {
 
         fetchJournalsBtn.setOnClickListener {
             loading.visibility = View.VISIBLE
+            fetchJournalsBtn.visibility = View.GONE
+            handler = Handler()
+            runnable = Runnable {
+                loading.visibility = View.GONE
+                showPdf()
+            }
+
+            handler?.postDelayed(runnable, 2000)
+        }
+    }
+
+    private fun showPdf() {
+        openPdf.visibility = View.VISIBLE
+        openPdf.setOnClickListener {
+            Intent(this, ViewPdfActivity::class.java).also {
+                startActivity(it)
+            }
         }
     }
 

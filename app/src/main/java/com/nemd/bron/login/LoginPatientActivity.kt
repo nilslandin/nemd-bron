@@ -3,6 +3,7 @@ package com.nemd.bron.login
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -39,10 +40,13 @@ class LoginPatientActivity : AppCompatActivity() {
 
         Timber.d("Login %s %s", email, password)
 
+        loading.visibility = View.VISIBLE
         firebaseAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     Timber.d("signInWithEmail:success")
+
+                    loading.visibility = View.GONE
 
                     SharedPreferenceHelper.setUserType(this, UserType.PATIENT)
                     Intent(this, PatientMainActivity::class.java)
@@ -51,6 +55,7 @@ class LoginPatientActivity : AppCompatActivity() {
                             finishAffinity()
                         }
                 } else {
+                    loading.visibility = View.GONE
                     // If sign in fails, display a message to the user.
                     Timber.e(task.exception, "signInWithEmail:failure")
                     Toast.makeText(baseContext, "Authentication failed.", Toast.LENGTH_SHORT).show()
